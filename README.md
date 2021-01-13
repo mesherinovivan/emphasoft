@@ -1,6 +1,6 @@
 ### **Запуск проекта в docker**
 
-`git clone `
+`git clone https://github.com/mesherinovivan/emphasoft.git`
 
 `cd emphasoft`
 
