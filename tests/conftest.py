@@ -1,8 +1,8 @@
+import os
+import random
+
 import pytest
 import requests
-import pytest
-import random
-import os
 
 BASE_SITE = os.environ.get('BASE_URL')
 TEST_USER = os.environ.get('TEST_USER')
