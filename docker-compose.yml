@@ -1,0 +1,12 @@
+version: "3.3"
+
+services:
+  web:
+    build: .
+    working_dir: /usr/src/
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./src:/usr/src/
+      - ./tests:/usr/src/tests
+    ports:
+      - "8000:8000"
