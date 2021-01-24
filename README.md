@@ -6,12 +6,21 @@
 
 `docker-compose build`
 
+
 `docker-compose up`
+
+### **Запуск миграций**
+
+`docker exec -it emphasoft_web_1 ./manage.py migrate`
+
+### **Запуск создание суперпользователя**
+
+`docker exec -it emphasoft_web_1 ./manage.py createsuperuser`
 
 ### **Запуск тестов**
 
 
-`docker-compose run -e BASE_URL="http://web:8000/" -e TEST_PASSWORD="admin" -e TEST_USER="admin" web  python -m pytest` 
+`docker-compose run  web  python -m pytest --ds=api.settings -vv` 
 
 # API
 

@@ -14,6 +14,18 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: emphasoft
+          POSTGRES_USER: emphasoft
+          POSTGRES_PASSWORD: emphasoft
+
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.9
@@ -33,4 +45,4 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest
+        pytest --ds=api.github_settings -v --nomigrations

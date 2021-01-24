@@ -12,19 +12,27 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import environ
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env(env.str('ENV_PATH', f'{BASE_DIR}/.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'f(ce313gvd*c+s*z@&(fv%a%p832=&6%#i$8b1!j7(qb^ldd&9'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ["*"]
 
@@ -76,12 +84,32 @@ WSGI_APPLICATION = 'api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+TEST = {'TEST': env.db('DATABASE_TEST_URL')}
+BASE = {'default': env.db('DATABASE_URL')}
+BASE["default"].update(TEST)
+
+DATABASES = BASE
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'emphasoft',
+#         'USER': 'emphasoft',
+#         'PASSWORD': 'emphasoft',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#         'TEST': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': str(BASE_DIR / 'db_test.sqlite3'),
+#         },
+#     }
+# }
 
 
 # Password validation

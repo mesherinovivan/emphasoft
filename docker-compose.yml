@@ -3,10 +3,31 @@ version: "3.3"
 services:
   web:
     build: .
-    working_dir: /usr/src/
+    working_dir: /usr/app/src
     command: python manage.py runserver 0.0.0.0:8000
+    env_file: .env.docker
+    depends_on:
+      - postgres
     volumes:
-      - ./src:/usr/src/
-      - ./tests:/usr/src/tests
+      - ./src:/usr/app/src/
+      - ./tests:/usr/app/tests
     ports:
       - "8000:8000"
+
+  postgres:
+    image: postgres:12
+    hostname: postgres
+    environment:
+      POSTGRES_DB: emphasoft
+      POSTGRES_USER: emphasoft
+      POSTGRES_PASSWORD: emphasoft
+    ports:
+      - 5432:5432
+    volumes:
+      - pg_data:/var/lib/postgresql/
+
+
+# Volumes
+volumes:
+    pg_data:
+      external: true
