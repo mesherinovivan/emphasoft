@@ -4,5 +4,5 @@ djangorestframework-simplejwt==4.6.0
 pytest==6.2.1
 pytest-django
 psycopg2==2.8.*
-mixer
-django-environ
+mixer==7.1.2
+django-environ==0.4.5

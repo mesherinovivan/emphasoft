@@ -3,11 +3,16 @@
 `git clone https://github.com/mesherinovivan/emphasoft.git`
 
 `cd emphasoft`
-cp variables.env .env.docker
+
+`cp variables.env .env.docker`
+
+`Изменяем в файле .env.docker настройки БД на с localhost на postgres`
+
 `docker-compose build`
 
+`docker volume create --name=pg_data`
 
-`docker-compose up`
+`docker-compose up -d`
 
 ### **Запуск миграций**
 
@@ -34,8 +39,7 @@ cp variables.env .env.docker
  -d "{ \"username\": \"iamescherinov\", \"first_name\": \"test\", \"last_name\": \"test\", \"password\": \"testtest\", \"is_active\": false}"`
 
 ##### GET
-`curl -X ПУЕ "http://localhost:8000/api/v1/users/"  -H "Content-Type: application/json" \
- -H "Authorization:Bearer <TOKEN!!!!!>" `
+`curl -X GET "http://localhost:8000/api/v1/users/"  -H "Content-Type: application/json"  -H "Authorization:Bearer <TOKEN!!!!!>" `
 
 ##### PUT
 `curl -X PUT "http://localhost:8000/api/v1/users/<USER_ID!!!!>/"  -H "Content-Type: application/json" \
