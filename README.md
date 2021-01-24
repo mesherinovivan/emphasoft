@@ -3,7 +3,7 @@
 `git clone https://github.com/mesherinovivan/emphasoft.git`
 
 `cd emphasoft`
-
+cp variables.env .env.docker
 `docker-compose build`
 
 
@@ -11,16 +11,16 @@
 
 ### **Запуск миграций**
 
-`docker exec -it emphasoft_web_1 ./manage.py migrate`
+`docker exec -it emphasoft_web_1 python manage.py migrate`
 
 ### **Запуск создание суперпользователя**
 
-`docker exec -it emphasoft_web_1 ./manage.py createsuperuser`
+`docker exec -it emphasoft_web_1 python manage.py createsuperuser`
 
 ### **Запуск тестов**
 
 
-`docker-compose run  web  python -m pytest --ds=api.settings -vv` 
+`docker exec -it emphasoft_web_1  python -m pytest --ds=api.settings -vv` 
 
 # API
 

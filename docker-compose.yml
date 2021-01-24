@@ -8,9 +8,9 @@ services:
     env_file: .env.docker
     depends_on:
       - postgres
-    volumes:
-      - ./src:/usr/app/src/
-      - ./tests:/usr/app/tests
+#    volumes:
+#      - ./src:/usr/app/src/
+#      - ./tests:/usr/app/tests
     ports:
       - "8000:8000"
 
