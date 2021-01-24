@@ -84,35 +84,13 @@ WSGI_APPLICATION = 'api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 TEST = {'TEST': env.db('DATABASE_TEST_URL')}
 BASE = {'default': env.db('DATABASE_URL')}
 BASE["default"].update(TEST)
 
 DATABASES = BASE
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'emphasoft',
-#         'USER': 'emphasoft',
-#         'PASSWORD': 'emphasoft',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#         'TEST': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': str(BASE_DIR / 'db_test.sqlite3'),
-#         },
-#     }
-# }
-
-
-# Password validation
+# Password validion
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -160,9 +138,13 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
 
     ),
-    'DEFAULT_PERMISSION_CLASSES': [
+    "DEFAULT_PERMISSION_CLASSES": [
         'rest_framework.permissions.IsAuthenticated',
     ],
+    "TEST_REQUEST_RENDERER_CLASSES":[
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.MultiPartRenderer'
+    ]
 }
 
 SIMPLE_JWT = {
